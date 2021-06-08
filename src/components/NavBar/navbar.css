@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: left;
+    background-color: rgb(196, 212, 255);
 }
 
 .navbar__item {
