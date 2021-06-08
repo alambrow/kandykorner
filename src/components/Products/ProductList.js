@@ -19,11 +19,11 @@ export const ProductList = () => {
     const getProductTypeName = (productId) => {
 
         for (let i = 0; i < productTypes.length; i++) {
-            if (productTypes[i].id = productId) {
-                debugger
+            if (productTypes[i].id === productId) {
                 return productTypes[i].class
             }
         }
+       
     }
 
 
@@ -37,7 +37,7 @@ export const ProductList = () => {
                         <div className="ProductId">ID: {product.id}</div>
                         <div className="productPrice">${product.price}</div>
                         <div className="productType">Product Type: 
-                            {getProductTypeName(product.id)}
+                            {getProductTypeName(parseInt(product.productType))}
                         </div>
                         </div>
                     )
