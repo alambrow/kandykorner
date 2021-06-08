@@ -4,6 +4,8 @@ import { ProductProvider } from "../src/components/Products/ProductProvider";
 import { ProductList } from "../src/components/Products/ProductList"
 import { ProductTypeProvider } from "../src/components/ProductTypes/ProductTypeProvider";
 import { Route } from "react-router-dom"
+import { EmployeeProvider } from "./components/Employees/EmployeeProvider";
+import { EmployeeList } from "./components/Employees/EmployeeList";
 
 
 export const ApplicationViews = () => (
@@ -22,6 +24,12 @@ export const ApplicationViews = () => (
                 </Route>
             </ProductTypeProvider>
         </ProductProvider>
+
+        <EmployeeProvider>
+            <Route exact path="/employees">
+                <EmployeeList />
+            </Route>
+        </EmployeeProvider>
     </>
     )
 )
