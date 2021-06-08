@@ -6,12 +6,10 @@ export const ProductProvider = (props) => {
     const [products, setProducts] = useState([])
 
     const getProducts = () => {
-        return fetch("http://localhost:8088/products")
+        return fetch("http://localhost:8088/products?_embed=productType")
         .then (res => res.json())
         .then (setProducts)
     }
-
-    // add function declaration omitted here
 
     return (
         <ProductContext.Provider value={{
