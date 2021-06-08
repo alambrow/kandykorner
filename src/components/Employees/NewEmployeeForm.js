@@ -24,21 +24,19 @@ export const EmployeeForm = () => {
             window.alert("Please select a location")
           } else {
               setIsLoading(true)
-    
               if (employeeId) {
                 updateEmployee({
                   id: employee.id,
                   name: employee.name,
                   locationId: parseInt(employee.locationId)
                 })
-                .then(() => history.push(`/employees/detail/${employee.id}`))
               } else {
                 addEmployee({
                   name: employee.name,
                   locationId: parseInt(employee.locationId)
                 })
-                .then(() => history.push("/employees"))
               }
+              history.push("/employees")
             }
     }
 
