@@ -27,14 +27,6 @@ export const ProductList = () => {
         }
     }
 
-    const handleClickAddItem = (event) => {
-        addOrderItem({
-           productId: event.target.id,
-           quantity: 1,
-           customerId: localStorage.getItem("kandy_customer")
-        })
-    }
-
     return (
         <section className="products">
             {
@@ -47,7 +39,13 @@ export const ProductList = () => {
                         <div className="productType">Product Type: 
                             {getProductTypeName(parseInt(product.productType))}
                         </div>
-                        <button id={product.id} onClick= {handleClickAddItem}>Purchase</button>
+                        <button onClick={event => {
+                            addOrderItem({
+                                productId: parseInt(event.target.id),
+                                quantity: 1,
+                                customerId: parseInt(localStorage.getItem("kandy_customer"))
+                            })
+                        }}>Add to order</button>
                         </div>
                     )
                 })

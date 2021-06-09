@@ -3,7 +3,13 @@ import React, { useState, createContext } from "react"
 export const OrderItemContext = createContext()
 
 export const OrderItemProvider = (props) => {
-    const [orderItems, setorderItems] = useState([])
+    const [orderItems, setOrderItems] = useState([])
+
+    const getOrderItems = () => {
+        return fetch(`http://localhost:8088/orderItems?customerId=${parseInt(localStorage.getItem("kandy_customer"))}`)
+        .then(res => res.json())
+        .then(setOrderItems)
+    }
 
     const addOrderItem = itemObj => {
         return fetch("http://localhost:8088/orderItems", {
@@ -13,14 +19,8 @@ export const OrderItemProvider = (props) => {
             },
             body: JSON.stringify(itemObj)
         })
-        .then (res => res.json())
-        .then (getOrderItems)
-    }
-
-    const getOrderItems = () => {
-        return fetch("http://localhost:8088/orderItems")
-        .then (res => res.json())
-        .then (setorderItems)
+        .then(res => res.json())
+        .then(getOrderItems)
     }
 
     return (
