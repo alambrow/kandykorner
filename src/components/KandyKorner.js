@@ -4,6 +4,7 @@ import { ApplicationViews } from "../ApplicationViews"
 import { NavBar } from "./NavBar/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
+import { OrderItemProvider } from "./Orders/OrderItemProvider"
 
 export const KandyKorner = () => (
     <>
@@ -13,7 +14,9 @@ export const KandyKorner = () => (
                     return (
                         <>
                         <h1>KandyKorner</h1>
-                        <NavBar />
+                        <OrderItemProvider>
+                            <NavBar />
+                        </OrderItemProvider>
                         <ApplicationViews />
                         </>
                     )
