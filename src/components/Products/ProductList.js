@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ProductTypeContext } from "../ProductTypes/ProductTypeProvider";
 import { ProductContext } from "./ProductProvider"
+import { addProtoOrderItem } from "../Orders/OrderProvider"
 import "./products.css";
 
 
@@ -27,6 +28,10 @@ export const ProductList = () => {
     }
 
 
+    const handleClickAddItemToProtoState = (productId) => {
+        addProtoOrderItem({productId})
+    }
+
     return (
         <section className="products">
             {
@@ -39,6 +44,7 @@ export const ProductList = () => {
                         <div className="productType">Product Type: 
                             {getProductTypeName(parseInt(product.productType))}
                         </div>
+                        <button onClick={handleClickAddItemToProtoState(parseInt(product.id))}>Purchase</button>
                         </div>
                     )
                 })
