@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ProductTypeContext } from "../ProductTypes/ProductTypeProvider";
 import { ProductContext } from "./ProductProvider"
-import { OrderContext } from "../Orders/OrderProvider"
 import "./products.css";
+import { OrderItemContext } from "../Orders/OrderItemProvider";
 
 
 export const ProductList = () => {
     const { products, getProducts } = useContext(ProductContext)
     const { productTypes, getProductTypes } = useContext(ProductTypeContext)
-    const { addProtoOrderItem } = useContext(OrderContext)
+    const { addOrderItem } = useContext(OrderItemContext)
 
 
     useEffect(() => {
@@ -27,11 +27,11 @@ export const ProductList = () => {
         }
     }
 
-    const handleClickAddItemToProtoState = (event) => {
-     
-        addProtoOrderItem({
+    const handleClickAddItem = (event) => {
+        addOrderItem({
            productId: event.target.id,
-           quantity: 1
+           quantity: 1,
+           customerId: localStorage.getItem("kandy_customer")
         })
     }
 
@@ -47,7 +47,7 @@ export const ProductList = () => {
                         <div className="productType">Product Type: 
                             {getProductTypeName(parseInt(product.productType))}
                         </div>
-                        <button id={product.id} onClick={handleClickAddItemToProtoState}>Purchase</button>
+                        <button id={product.id} onClick= {handleClickAddItem}>Purchase</button>
                         </div>
                     )
                 })

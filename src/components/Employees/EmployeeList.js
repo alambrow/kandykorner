@@ -4,13 +4,20 @@ import { EmployeeContext } from "./EmployeeProvider.js"
 import "./employees.css"
 
 export const EmployeeList = () => {
-    const { employees, getEmployees} = useContext(EmployeeContext)
+    const { employees, getEmployees, releaseEmployee } = useContext(EmployeeContext)
 
     useEffect(() => {
         getEmployees()
     }, [])
 
     const history = useHistory()
+
+    const handleRelease = (event) => {
+        releaseEmployee(parseInt(event.target.id))
+        .then(() => {
+            history.push("/employees")
+        })
+    }
 
     return (
         <>
@@ -29,6 +36,7 @@ export const EmployeeList = () => {
                             <div className="employee__location">
                                 { employee.location.address }
                             </div>
+                            <button id={employee.id} onClick={handleRelease}>Release Employee</button>
                         </div>
                     )
                 })

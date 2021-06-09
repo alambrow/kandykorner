@@ -8,6 +8,8 @@ import { EmployeeProvider } from "./components/Employees/EmployeeProvider";
 import { EmployeeList } from "./components/Employees/EmployeeList";
 import { EmployeeForm } from "./components/Employees/NewEmployeeForm"
 import { OrderProvider } from "./components/Orders/OrderProvider";
+import { CurrentOrder } from "./components/Orders/CurrentOrder";
+import { OrderItemProvider } from "./components/Orders/OrderItemProvider";
 
 
 export const ApplicationViews = () => (
@@ -22,9 +24,14 @@ export const ApplicationViews = () => (
         <ProductProvider>
             <ProductTypeProvider>
                 <OrderProvider>
+                    <OrderItemProvider>
                     <Route exact path="/products">
                         <ProductList />
                     </Route>
+                    <Route exact path="/myOrder">
+                        <CurrentOrder />
+                    </Route>
+                    </OrderItemProvider>
                 </OrderProvider>
             </ProductTypeProvider>
         </ProductProvider>
