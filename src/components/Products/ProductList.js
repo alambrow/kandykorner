@@ -8,7 +8,7 @@ import { OrderItemContext } from "../Orders/OrderItemProvider";
 export const ProductList = () => {
     const { products, getProducts } = useContext(ProductContext)
     const { productTypes, getProductTypes } = useContext(ProductTypeContext)
-    const { addOrderItem } = useContext(OrderItemContext)
+    const { orderItems, getOrderItems, addOrderItem, editOrderItem } = useContext(OrderItemContext)
 
 
     useEffect(() => {
@@ -27,6 +27,32 @@ export const ProductList = () => {
         }
     }
 
+    useEffect(() => {
+        getOrderItems()
+    }, [])
+
+    const handleClickAddOrderItem = (event) => {
+
+        for (let i = 0; i < orderItems.length; i++) {
+            if (orderItems[i].productId === parseInt(event.target.id)) {
+                editOrderItem({
+                    id: parseInt(orderItems[i].id),
+                    quantity: parseInt(orderItems[i].quantity + 1),
+                    productId: parseInt(event.target.id),
+                    customerId: parseInt(localStorage.getItem("kandy_customer"))
+                })
+                return
+            }
+        }
+
+        addOrderItem({
+        productId: parseInt(event.target.id),
+        quantity: 1,
+        customerId: parseInt(localStorage.getItem("kandy_customer"))
+        })
+
+    }
+
     return (
         <section className="products">
             {
@@ -39,13 +65,7 @@ export const ProductList = () => {
                         <div className="productType">Product Type: 
                             {getProductTypeName(parseInt(product.productType))}
                         </div>
-                        <button onClick={event => {
-                            addOrderItem({
-                                productId: parseInt(event.target.id),
-                                quantity: 1,
-                                customerId: parseInt(localStorage.getItem("kandy_customer"))
-                            })
-                        }}>Add to order</button>
+                        <button id={product.id} onClick={handleClickAddOrderItem}>Add to order</button>
                         </div>
                     )
                 })
