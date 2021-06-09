@@ -3,7 +3,7 @@ import React, { useState, createContext } from "react"
 export const OrderContext = createContext()
 
 export const OrderProvider = (props) => {
-    const [orders, setOrders] = useState([])
+    const [orders, setOrders, setProtoOrderItems] = useState([])
 
     const getOrders = () => {
         return fetch("http://localhost:8088/orders")
@@ -22,10 +22,10 @@ export const OrderProvider = (props) => {
         .then (setOrders)
     }
 
-    const getProtoOrderItms = () => {
+    const getProtoOrderItems = () => {
         return fetch("http://localhost:8088/protoOrderItems")
         .then (res => res.json())
-        .then (getProtoOrderItms)
+        .then (setProtoOrderItems)
     }
 
     const addProtoOrderItem = itemObj => {
@@ -37,7 +37,7 @@ export const OrderProvider = (props) => {
             body: JSON.stringify(itemObj)
         })
         .then (res => res.json())
-        .then (getProtoOrderItms)
+        .then (getProtoOrderItems)
     }
 
     const addOrder = orderObj => {
@@ -66,7 +66,7 @@ export const OrderProvider = (props) => {
 
     return (
         <OrderContext.Provider value={{
-            orders, getOrders, getOrderItems, addOrder, getOrderById, addOrderItem, getProtoOrderItms, addProtoOrderItem
+            orders, addProtoOrderItem, getProtoOrderItems, addOrderItem, addOrder, getOrders, getOrderById
         }}>
             {props.children}
         </OrderContext.Provider>

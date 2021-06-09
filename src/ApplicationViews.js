@@ -7,6 +7,7 @@ import { Route } from "react-router-dom"
 import { EmployeeProvider } from "./components/Employees/EmployeeProvider";
 import { EmployeeList } from "./components/Employees/EmployeeList";
 import { EmployeeForm } from "./components/Employees/NewEmployeeForm"
+import { OrderProvider } from "./components/Orders/OrderProvider";
 
 
 export const ApplicationViews = () => (
@@ -20,9 +21,11 @@ export const ApplicationViews = () => (
         
         <ProductProvider>
             <ProductTypeProvider>
-                <Route exact path="/products">
-                    <ProductList />
-                </Route>
+                <OrderProvider>
+                    <Route exact path="/products">
+                        <ProductList />
+                    </Route>
+                </OrderProvider>
             </ProductTypeProvider>
         </ProductProvider>
 
